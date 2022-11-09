@@ -1,0 +1,10 @@
+services:
+  mta.localhost:
+    hostname: mta.localhost
+    build:
+      context: ./mta
+  mda.localhost:
+    hostname: mda.localhost
+    build:
+      context: ./mda
+    command: postfix start-fg
