@@ -35,5 +35,5 @@ show-mta-queue:
 
 .PHONY: send-mail
 send-mail:
-	sed s/FQDN/$(mda)/g mail | docker compose exec -T $(mta) sendmail -t
+	sed -e s/TO/$(mda)/ -e s/FROM/$(mta)/ mail | docker compose exec -T $(mta) sendmail -t
 
