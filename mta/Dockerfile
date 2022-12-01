@@ -5,6 +5,7 @@ RUN apt-get update \
     postfix \
     dnsutils \
     tini \
+    procps \
  && apt-get -y clean \
  && rm -rf /var/lib/apt/lists/*
 
