@@ -4,7 +4,6 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     postfix \
     dnsutils \
-    tini \
     procps \
  && apt-get -y clean \
  && rm -rf /var/lib/apt/lists/*
@@ -15,6 +14,4 @@ COPY main.cf /etc/postfix/main.cf
 COPY transport /etc/postfix/transport
 COPY run.sh /run.sh
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/run.sh"]
-
