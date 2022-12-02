@@ -1,10 +1,10 @@
 #!/bin/bash
 
 shutdown_handler() {
-    pids=$(pgrep -P $(cat /var/spool/postfix/pid/master.pid))
+    child_process_pids=$(pgrep -P $(cat /var/spool/postfix/pid/master.pid))
     postfix stop
 
-    for i in $pids
+    for i in $child_process_pids
     do
         # https://unix.stackexchange.com/questions/103862/how-do-i-wait-on-a-program-started-in-another-shell
         while $(ps -p $i > /dev/null 2>&1)
