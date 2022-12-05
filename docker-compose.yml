@@ -3,6 +3,7 @@ services:
     hostname: mta.localhost
     build:
       context: ./mta
+    command: /bin/sh -c "while :; do sleep 10; done"
   mda.localhost:
     hostname: mda.localhost
     build:

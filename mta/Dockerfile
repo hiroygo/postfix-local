@@ -12,6 +12,8 @@ RUN cp /etc/services /var/spool/postfix/etc/
 
 COPY main.cf /etc/postfix/main.cf
 COPY transport /etc/postfix/transport
-COPY run.sh /run.sh
 
-CMD ["/run.sh"]
+COPY master.cf /etc/postfix/master.cf
+RUN useradd -m pipe-test
+COPY pipe-test.sh /pipe-test.sh
+

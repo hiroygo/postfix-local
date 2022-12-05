@@ -37,3 +37,6 @@ show-mta-queue:
 send-mail:
 	sed -e s/TO/$(mda)/ -e s/FROM/$(mta)/ mail | docker compose exec -T $(mta) sendmail -t
 
+.PHONY: pipe-test
+pipe-test:
+	sed -e s/TO/$(mta)/ -e s/FROM/$(mta)/ mail | docker compose exec -T $(mta) sendmail -t
