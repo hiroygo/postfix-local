@@ -7,7 +7,7 @@ shutdown_handler() {
     for i in $child_process_pids
     do
         # https://unix.stackexchange.com/questions/103862/how-do-i-wait-on-a-program-started-in-another-shell
-        while $(ps -p $i > /dev/null 2>&1)
+        while ps -p "$i" > /dev/null 2>&1
         do
             sleep 0.1
         done
