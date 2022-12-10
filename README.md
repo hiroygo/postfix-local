@@ -1,10 +1,10 @@
 # postfix-local
-Start Postfix containers as MTA and MDA for send test mail.
+Launch the Postfix container environment where mail can be sent and received.
 
 * `make up`: Start containers
-* `make send-mail`: Send a test mail from MTA to MDA
-* `make show-mda-mail`: Show mails received by MDA
-* `make log-mta`, `make log-mda`: Show MTA or MDA logs
+* `make send-mail`: Send a test mail from root@send.localhost to root@recv.localhost
+* `make show-recv-mail`: Show mails received by root@recv.localhost
+* `make log-send`, `make log-recv`: Show send.localhost or recv.localhost logs
 
 ## Example
 ```
@@ -13,24 +13,24 @@ docker compose up -d --build
 ...
 
 % make send-mail
-sed -e s/TO/mda.localhost/ -e s/FROM/mta.localhost/ mail | docker compose exec -T mta.localhost sendmail -t
+sed -e s/TO/recv.localhost/ -e s/FROM/send.localhost/ mail | docker compose exec -T send.localhost sendmail -t
 
-% make show-mda-mail
-docker compose exec -it mda.localhost cat /var/spool/mail/root
-From root@mta.localhost  Fri Nov 11 02:05:18 2022
-Return-Path: <root@mta.localhost>
-X-Original-To: root@mda.localhost
-Delivered-To: root@mda.localhost
-Received: from mta.localhost (unknown [172.22.0.3])
-	by mda.localhost (Postfix) with ESMTPS id C974DF9461
-	for <root@mda.localhost>; Fri, 11 Nov 2022 02:05:18 +0000 (UTC)
-Received: by mta.localhost (Postfix, from userid 0)
-	id BB747F9457; Fri, 11 Nov 2022 02:05:18 +0000 (UTC)
-From: root@mta.localhost
-To: root@mda.localhost
+% make show-recv-mail
+docker compose exec -it recv.localhost cat /var/spool/mail/root
+From root@send.localhost  Sat Dec 10 07:37:39 2022
+Return-Path: <root@send.localhost>
+X-Original-To: root@recv.localhost
+Delivered-To: root@recv.localhost
+Received: from send.localhost (unknown [172.22.0.2])
+        by recv.localhost (Postfix) with ESMTPS id 08B9012EF00
+        for <root@recv.localhost>; Sat, 10 Dec 2022 07:37:39 +0000 (UTC)
+Received: by send.localhost (Postfix, from userid 0)
+        id E3D3F12EEF9; Sat, 10 Dec 2022 07:37:38 +0000 (UTC)
+From: root@send.localhost
+To: root@recv.localhost
 Subject: this is subject
-Message-Id: <20221111020518.BB747F9457@mta.localhost>
-Date: Fri, 11 Nov 2022 02:05:18 +0000 (UTC)
+Message-Id: <20221210073738.E3D3F12EEF9@send.localhost>
+Date: Sat, 10 Dec 2022 07:37:38 +0000 (UTC)
 
 this is body.
 

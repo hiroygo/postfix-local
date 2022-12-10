@@ -1,10 +1,10 @@
 services:
-  mta.localhost:
-    hostname: mta.localhost
+  send.localhost:
+    hostname: send.localhost
     build:
-      context: ./mta
-  mda.localhost:
-    hostname: mda.localhost
+      context: ./send
+  recv.localhost:
+    hostname: recv.localhost
     build:
-      context: ./mda
+      context: ./recv
     command: postfix start-fg
