@@ -2,8 +2,8 @@
 Launch the Postfix container environment where mail can be sent and received.
 
 * `make up`: Start containers
-* `make send-mail`: Send a test mail from root@send.localhost to root@recv.localhost
-* `make show-recv-mail`: Show mails received by root@recv.localhost
+* `make send-mail`: Send a test mail from `root@send.localhost` to `root@recv.localhost`
+* `make show-recv-mail`: Show mails received by `root@recv.localhost`
 * `make log-send`, `make log-recv`: Show send.localhost or recv.localhost logs
 
 ## Example
