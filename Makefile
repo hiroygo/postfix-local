@@ -1,5 +1,5 @@
-mda := mda.localhost
-mta := mta.localhost
+recv := recv.localhost
+send := send.localhost
 
 .PHONY: up
 up:
@@ -9,31 +9,31 @@ up:
 stop:
 	docker compose rm -f -s
 
-.PHONY: exec-mda
-exec-mda:
-	docker compose exec -it $(mda) bash
+.PHONY: exec-recv
+exec-recv:
+	docker compose exec -it $(recv) bash
 
-.PHONY: exec-mta
-exec-mta:
-	docker compose exec -it $(mta) bash
+.PHONY: exec-send
+exec-send:
+	docker compose exec -it $(send) bash
 
-.PHONY: log-mda
-log-mda:
-	docker compose logs $(mda)
+.PHONY: log-recv
+log-recv:
+	docker compose logs $(recv)
 
-.PHONY: log-mta
-log-mta:
-	docker compose logs $(mta)
+.PHONY: log-send
+log-send:
+	docker compose logs $(send)
 
-.PHONY: show-mda-mail
-show-mda-mail:
-	docker compose exec -it $(mda) cat /var/spool/mail/root
+.PHONY: show-recv-mail
+show-recv-mail:
+	docker compose exec -it $(recv) cat /var/spool/mail/root
 
-.PHONY: show-mta-queue
-show-mta-queue:
-	docker compose exec -it $(mta) postqueue -p
+.PHONY: show-send-queue
+show-send-queue:
+	docker compose exec -it $(send) postqueue -p
 
 .PHONY: send-mail
 send-mail:
-	sed -e s/TO/$(mda)/ -e s/FROM/$(mta)/ mail | docker compose exec -T $(mta) sendmail -t
+	sed -e s/TO/$(recv)/ -e s/FROM/$(send)/ mail | docker compose exec -T $(send) sendmail -t
 
