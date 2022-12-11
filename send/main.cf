@@ -44,4 +44,3 @@ inet_interfaces = all
 inet_protocols = all
 maillog_file = /dev/stdout
 
-transport_maps = hash:/etc/postfix/transport

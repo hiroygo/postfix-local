@@ -11,7 +11,6 @@ RUN apt-get update \
 RUN cp /etc/services /var/spool/postfix/etc/
 
 COPY main.cf /etc/postfix/main.cf
-COPY transport /etc/postfix/transport
 COPY run.sh /run.sh
 
 CMD ["/run.sh"]
