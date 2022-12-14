@@ -10,7 +10,9 @@ RUN apt-get update \
 
 RUN cp /etc/services /var/spool/postfix/etc/
 
-COPY main.cf /etc/postfix/main.cf
-COPY run.sh /run.sh
+RUN sed -i '/^myhostname =/d' /etc/postfix/main.cf
+RUN sed -i '/^mydestination =/d' /etc/postfix/main.cf
+RUN echo 'maillog_file = /dev/stdout' >> /etc/postfix/main.cf
 
+COPY run.sh /run.sh
 CMD ["/run.sh"]
