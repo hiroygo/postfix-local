@@ -3,6 +3,8 @@ services:
     hostname: send.localhost
     build:
       context: ./send
+    ports:
+      - "8080:25"
   recv.localhost:
     hostname: recv.localhost
     build:
