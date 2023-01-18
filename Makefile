@@ -5,8 +5,8 @@ send := send.localhost
 up:
 	docker compose up -d --build 
 
-.PHONY: stop
-stop:
+.PHONY: down
+down:
 	docker compose rm -f -s
 
 .PHONY: exec-recv
