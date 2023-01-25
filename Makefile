@@ -1,5 +1,6 @@
 recv := recv.localhost
 send := send.localhost
+postqueue := postqueue.localhost
 
 .PHONY: up
 up:
@@ -16,6 +17,10 @@ exec-recv:
 .PHONY: exec-send
 exec-send:
 	docker compose exec -it $(send) bash
+
+.PHONY: exec-postqueue
+exec-postqueue:
+	docker compose exec -it $(postqueue) bash
 
 .PHONY: log-recv
 log-recv:

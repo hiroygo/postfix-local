@@ -3,8 +3,24 @@ services:
     hostname: send.localhost
     build:
       context: ./send
+    volumes:
+      - type: volume
+        source: queue-directory
+        target: /var/spool/postfix
   recv.localhost:
     hostname: recv.localhost
     build:
       context: ./recv
     command: postfix start-fg
+  postqueue.localhost:
+    hostname: postqueue.localhost
+    build:
+      context: ./postqueue
+    tty: true
+    volumes:
+      - type: volume
+        source: queue-directory
+        target: /var/spool/postfix
+        read_only: true
+volumes:
+  queue-directory:
