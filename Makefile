@@ -8,7 +8,7 @@ up:
 
 .PHONY: down
 down:
-	docker compose rm -f -s
+	docker compose down --volumes --remove-orphans
 
 .PHONY: exec-recv
 exec-recv:
